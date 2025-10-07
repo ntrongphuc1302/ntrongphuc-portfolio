@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
+:root {
+  /* Màu này sẽ được JS thay đổi liên tục */
+  --clr: #ff0055;
+  --text-dark: #222;
+  --bg-dark: #222;
+  --clr-white: #fff;
+  --clr-gray: #ccc;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-dark);
+}
+
+.portfolio-container {
+  text-align: center;
+}
+
+.intro-text {
+  font-size: 1.5em;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: var(--clr-white);
+  padding: 0 20px;
+  font-size: 3.5em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* CSS cho Text Animation */
+h2 span {
+  position: relative;
+  color: rgba(255, 255, 255, 0.1);
+  display: none;
+}
+
+h2 span.active {
+  display: inline-block;
+}
+
+h2 span::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: var(--clr);
+  border-right: 4px solid var(--clr);
+  filter: drop-shadow(0 0 6px) drop-shadow(0 0 25px);
+  animation: animate2 4s linear infinite;
+}
+
+@keyframes animate2 {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+  70%,
+  90% {
+    width: 100%;
+  }
+}
+
+.description {
+  color: var(--clr-gray);
+  font-size: 1.2em;
+  max-width: 600px;
+  margin: 20px auto 40px; /* Tăng margin bottom để cách khu vực nút */
+  line-height: 1.5;
+}
+
+/* KHU VỰC NÚT HÀNH ĐỘNG MỚI */
+.cta-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Khoảng cách giữa các nút */
+}
+
+.cta-button {
+  padding: 12px 25px;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 50px; /* Bo tròn nút hơn */
+  transition: all 0.3s ease;
+  border: 2px solid transparent; /* Dùng để tạo hiệu ứng hover cho nút secondary */
+  font-size: 1em;
+}
+
+/* Nút chính (Projects) - Dùng màu động từ JS */
+.cta-button.primary {
+  background: var(--clr);
+  color: var(--text-dark);
+  border-color: var(--clr);
+}
+
+.cta-button.primary:hover {
+  background: transparent;
+  color: var(--clr);
+  filter: none; /* Bỏ filter brightness vì đã chuyển màu */
+}
+
+/* Nút phụ (About, Contact) */
+.cta-button.secondary {
+  background: transparent;
+  color: var(--clr-white);
+  border-color: var(--clr-white);
+}
+
+.cta-button.secondary:hover {
+  background: var(--clr);
+  color: var(--text-dark);
+  border-color: var(--clr);
+}

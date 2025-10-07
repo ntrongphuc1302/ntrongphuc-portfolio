@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #222;
+  color: #fff;
+}
+
+/* --- Layout Portfolio Cơ Bản (Giữ nguyên) --- */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  background: rgba(34, 34, 34, 0.9);
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #fff;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 40px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  /* Bạn có thể dùng một màu cố định hoặc random, ở đây tôi dùng cố định */
+  color: #ff0055;
+}
+
+.hero-section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.intro-text p {
+  /* Đã tăng cỡ chữ để khớp với h2 (dòng "I'm a") */
+  font-size: 2em;
+  font-weight: 300;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  /* Thêm style để đặt 2 dòng (p và h2) cạnh nhau */
+  display: inline;
+}
+
+/* --- Hiệu ứng Text Animation (Giữ nguyên, dùng var(--clr)) --- */
+
+.intro-text h2 {
+  color: #fff;
+  padding: 0;
+  /* GIẢM font-size để nó khớp với dòng <p> phía trên */
+  font-size: 4em;
+  font-weight: 700;
+  line-height: 1.2;
+  /* Đặt h2 là inline-block để nó nằm cùng dòng với <p> */
+  display: inline-block;
+  margin-left: 10px; /* Thêm khoảng cách nhỏ giữa "a" và vai trò */
+}
+
+.intro-text h2 span {
+  position: relative;
+  color: rgba(255, 255, 255, 0.1);
+  /* 7 vai trò, mỗi vai trò 2s -> 14s cho 1 chu kỳ */
+  animation: animate 14s infinite;
+  animation-delay: calc(-2s * var(--i));
+  transition: --clr 0.5s ease; /* Thêm transition để màu chuyển mượt hơn */
+}
+
+@keyframes animate {
+  0% {
+    display: inline-block;
+  }
+  /* 100% / 7 = 14.28% */
+  14.28%,
+  100% {
+    display: none;
+  }
+}
+
+.intro-text h2 span::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  /* Dùng biến --clr do JavaScript định nghĩa */
+  color: var(--clr);
+  border-right: 4px solid var(--clr);
+  filter: drop-shadow(0 0 6px var(--clr)) drop-shadow(0 0 25px var(--clr));
+  animation: animate2 4s linear infinite;
+  /* Thêm transition để màu và hiệu ứng viền chuyển mượt */
+  transition: border-color 0.5s ease, color 0.5s ease, filter 0.5s ease;
+}
+
+@keyframes animate2 {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+  70%,
+  90% {
+    width: 100%;
+  }
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phuc's Dynamic Portfolio (Neon)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Phuc.</div>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero-section">
+      <div class="intro-text">
+        <p>Hi, I'm Phuc, I'm a</p>
+        <h2 id="dynamic-roles">
+          <span style="--i: 0" data-text="Developer">Developer</span>
+          <span style="--i: 1" data-text="Designer">Designer</span>
+          <span style="--i: 2" data-text="Gamer">Gamer</span>
+          <span style="--i: 3" data-text="Programmer">Programmer</span>
+          <span style="--i: 4" data-text="Creator">Creator</span>
+          <span style="--i: 5" data-text="Blogger">Blogger</span>
+          <span style="--i: 6" data-text="Enthusiast">Enthusiast</span>
+        </h2>
+      </div>
+    </section>
+
+    <script>
+      // Danh sách các màu sáng/neon cố định
+      const neonColors = [
+        "#ff0055", // Đỏ Neon
+        "#00ffc8", // Xanh Ngọc Neon
+        "#ffcc00", // Vàng Neon
+        "#1e90ff", // Xanh Dương Sáng
+        "#9932cc", // Tím Neon
+        "#f08080", // San Hô Sáng
+        "#7fff00", // Xanh Lá Chanh Neon
+      ];
+
+      const roleSpans = document.querySelectorAll("#dynamic-roles span");
+
+      // Biến để lưu trữ màu cuối cùng của mỗi span
+      const lastColors = new Array(roleSpans.length).fill(null);
+
+      // Hàm lấy một màu ngẫu nhiên KHÔNG trùng với màu cuối cùng
+      function getUniqueRandomColor(index) {
+        let newColor;
+        let lastColor = lastColors[index];
+
+        // Lặp cho đến khi tìm được màu khác với màu cuối cùng
+        do {
+          const randomIndex = Math.floor(Math.random() * neonColors.length);
+          newColor = neonColors[randomIndex];
+        } while (newColor === lastColor);
+
+        // Cập nhật màu cuối cùng cho span hiện tại
+        lastColors[index] = newColor;
+        return newColor;
+      }
+
+      roleSpans.forEach((span, index) => {
+        // 1. Đặt màu ban đầu (đảm bảo mỗi span có màu khác nhau ban đầu)
+        // Lấy màu ban đầu từ danh sách neonColors
+        const initialColor = neonColors[index % neonColors.length];
+        span.style.setProperty("--clr", initialColor);
+        lastColors[index] = initialColor;
+
+        // 2. Cập nhật màu sắc sau mỗi chu kỳ animation (14 giây)
+        setInterval(() => {
+          // Lấy màu ngẫu nhiên mới, đảm bảo không trùng lặp
+          const newColor = getUniqueRandomColor(index);
+          span.style.setProperty("--clr", newColor);
+        }, 14000); // Đổi màu sau mỗi 14 giây (chu kỳ animation)
+      });
+    </script>
+  </body>
+</html>
